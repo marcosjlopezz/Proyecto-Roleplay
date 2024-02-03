@@ -169,7 +169,10 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 				SetVehiclePosEx(vehicleid, Mechanic_Pieces_Truck[0], Mechanic_Pieces_Truck[1], Mechanic_Pieces_Truck[2]);
 				SetVehicleZAngle(vehicleid, Mechanic_Pieces_Truck[3]);
 
-				SetTimerEx("AttachMechanicTrailerToTruck", 1000, false, "iii", playerid, vehicleid, trailer_id);
+				GLOBAL_VEHICLES[vehicleid][gb_vehicle_PARAMS_ENGINE] = 0;
+				UpdateVehicleParams(vehicleid);
+
+				SetTimerEx("AttachMechanicTrailerToTruck", 500, false, "iii", playerid, vehicleid, trailer_id);
 			}
 			else SendMessage(playerid, "Necesitas ser mecanico o gandolero para poder hacer encargos.");
 			return Y_HOOKS_BREAK_RETURN_1;
@@ -220,6 +223,9 @@ public MechanicTrailerLoadUp(playerid, vehicleid)
 		pTemp(playerid)[pt_TRUCK_LOADING_VALUE] += 10.0;
 		if(pTemp(playerid)[pt_TRUCK_LOADING_VALUE] > 100.0) pTemp(playerid)[pt_TRUCK_LOADING_VALUE] = 100.0;
 		
+		GLOBAL_VEHICLES[vehicleid][gb_vehicle_PARAMS_ENGINE] = 0;
+		UpdateVehicleParams(vehicleid);
+
 		UpdatePlayerLoadingTruckSize(playerid);
 		KillTimer(pTemp(playerid)[pt_TIMERS][9]);
 		pTemp(playerid)[pt_TIMERS][9] = SetTimerEx("MechanicTrailerLoadUp", 1000, false, "ii", playerid, vehicleid);
@@ -280,17 +286,17 @@ hook OnPlayerEnterDynamicCP(playerid, checkpointid)
 
 	switch(info[0])
     {
-        case CHECKPOINT_TYPE_TRAILER:
+        case CHECKPOINT_TYPE_MECHANIC:
         {
 			if(GetPlayerState(playerid) != PLAYER_STATE_DRIVER) return 1;
 			if(GetPlayerWork(playerid, WORK_TRAILER) || GetPlayerWork(playerid, WORK_MECHANIC))
 			{
 				new vehicleid = GetPlayerVehicleID(playerid);
 				if(GetTrailerDriver(vehicleid) != PI[playerid][pi_ID]) return 1;
-				/*if(TrailerVehicle(vehicleid)[trailer_DELIVERED]) return 1;
+				if(TrailerVehicle(vehicleid)[trailer_DELIVERED]) return 1;
 				if(!GetTrailerInfoLoaded(vehicleid)) return 1;
 				if(GetTrailerInfoUnLoading(vehicleid)) return 1;
-				if(GetTrailerInfoLoading(vehicleid)) return 1;*/
+				if(GetTrailerInfoLoading(vehicleid)) return 1;
 
 				new trailerid = GetVehicleTrailer(vehicleid);
 				if(!IsTrailerAttachedToVehicle(vehicleid)) return 1;
@@ -319,10 +325,11 @@ hook OnPlayerEnterDynamicCP(playerid, checkpointid)
 				KillTimer(pTemp(playerid)[pt_TIMERS][7]);
 				KillTimer(pTemp(playerid)[pt_TIMERS][9]);
 				pTemp(playerid)[pt_TIMERS][9] = SetTimerEx("MechanicTrailerUnLoadUp", 1000, false, "ii", playerid, vehicleid);
+				return 1;
 			}
             return Y_HOOKS_BREAK_RETURN_1;
         }
-        case CHECKPOINT_TYPE_FINISH_TRAILER:
+        case CHECKPOINT_TYPE_FINISH_MECHANIC:
         {
 			if(GetPlayerState(playerid) != PLAYER_STATE_DRIVER) return 1;
 			if(GetPlayerWork(playerid, WORK_TRAILER) || GetPlayerWork(playerid, WORK_MECHANIC))
@@ -330,10 +337,10 @@ hook OnPlayerEnterDynamicCP(playerid, checkpointid)
 				new vehicleid = GetPlayerVehicleID(playerid);
 
 				if(GetTrailerDriver(vehicleid) != PI[playerid][pi_ID]) return 1;
-				/*if(!TrailerVehicle(vehicleid)[trailer_DELIVERED]) return 1;
+				if(!TrailerVehicle(vehicleid)[trailer_DELIVERED]) return 1;
 				if(!GetTrailerInfoLoaded(vehicleid)) return 1;
 				if(GetTrailerInfoUnLoading(vehicleid)) return 1;
-				if(GetTrailerInfoLoading(vehicleid)) return 1;*/
+				if(GetTrailerInfoLoading(vehicleid)) return 1;
 
 				new trailerid = GetVehicleTrailer(vehicleid);
 				if(gVehicle(trailerid)[gb_vehicle_TYPE] != VEHICLE_TYPE_WORK) return 1;
@@ -392,6 +399,8 @@ hook OnPlayerEnterDynamicCP(playerid, checkpointid)
 					format(string, sizeof string, "+%s$", number_format_thousand(payment));
 					GameTextForPlayer(playerid, string, 5000, 1);
 				}
+
+				return 1;
 			}
             return Y_HOOKS_BREAK_RETURN_1;
         }
