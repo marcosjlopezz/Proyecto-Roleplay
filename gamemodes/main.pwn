@@ -12,7 +12,7 @@ AntiAmx()
     #pragma unused a
 }
 
-#define IP_DB   "127.0.0.1"
+#define IP_DB   "localhost"
 #define USER_DB "root"
 #define NAME_DB "server_db"
 #define PASS_DB ""
@@ -41,16 +41,13 @@ AntiAmx()
 
 #define SERVER_VERSION			"1.0"
 
-#define SERVER_NAME				"GM Roleplay"
-#define SERVER_SHORT_NAME		"GM"
-
-#define SERVER_NAME2			"GM ROLEPLAY"
-#define SERVER_SHORT_NAME2		"GM"
+#define SERVER_NAME				"Hao Roleplay"
+#define SERVER_SHORT_NAME		"Hao"
 
 #define SERVER_GAMEMODE			"Roleplay en Español"
 #define SERVER_LANGUAGE			"Español - Spanish"
-#define SERVER_WEBSITE			"-"
-#define SERVER_HOSTNAME 		"(ESP) "SERVER_NAME""
+#define SERVER_WEBSITE			"www.sa-mp.mp"
+#define SERVER_HOSTNAME 		"(ESP) "SERVER_NAME" |"
 
 #define SERVER_COIN				"Gemas"
 
@@ -143,6 +140,13 @@ AntiAmx()
 #define	reg_name					cache_get_value_name
 #define	reg_int						cache_get_value_int
 #define	reg_float					cache_get_value_float
+
+new Notice_Textdraw_Format[] =
+{
+	"\
+		-~n~\
+	"
+};
 
 stock
 	bool:server_loaded,
@@ -5195,7 +5199,7 @@ public OnGameModeInit()
 	AntiAmx();
 
 	SetGameModeText(SERVER_GAMEMODE);
-    SendRconCommandf("hostname "SERVER_HOSTNAME" [%s]", HostNames[ random(sizeof(HostNames)) ]);
+    SendRconCommandf("hostname "SERVER_HOSTNAME" !%s¡", HostNames[ random(sizeof(HostNames)) ]);
     SendRconCommand("language "SERVER_LANGUAGE"");
 	SendRconCommand("weburl "SERVER_WEBSITE"");
 	SendRconCommand("mapname "SERVER_WEBSITE"");
@@ -5330,7 +5334,7 @@ SanAndreas()
 
 	//Tuning
 	CreateDynamicMapIcon(-602.2586, -508.6797, 25.2885, 63, -1, 0, 0);
-	CreateDynamic3DTextLabel("Usa {"#PRIMARY_COLOR"}/tuning {FFFFFF}para tunear tu vehículo", 0xFFFFFFFF, -602.2586, -508.6797, 25.2885, 10.0, .testlos = true, .worldid = 0, .interiorid = 0);
+	CreateDynamic3DTextLabel("Pulsa {"#PRIMARY_COLOR"}'H'{FFFFFF} para tunear tu vehículo", 0xFFFFFFFF, -602.2586, -508.6797, 25.2885, 10.0, .testlos = true, .worldid = 0, .interiorid = 0);
 
 	//3d texts armarios
 	for(new i = 0; i < sizeof PROPERTY_CLOSET_POS; i++)
@@ -6533,7 +6537,7 @@ ptask TipMessages[TIP_MESSAGES_INTERVAL](playerid)
 {
 	if(pTemp(playerid)[pt_USER_LOGGED])
 	{
-		SendClientMessagef(playerid, PLAYER_ACTION_COLOR, "["SERVER_NAME"] {"#PRIMARY_COLOR"}%s", RandomTipsMessages[ random(sizeof(RandomTipsMessages)) ]);
+		SendClientMessagef(playerid, YELLOW_COLOR2, "[Consejo] {d1d1d1}%s.", RandomTipsMessages[ random(sizeof(RandomTipsMessages)) ]);
 	}
 }
 
@@ -18848,13 +18852,13 @@ public ConnectDatabase()
 	new MySQLOpt:option_id = mysql_init_options();
 	mysql_set_option(option_id, AUTO_RECONNECT, true);
 	mysql_set_option(option_id, SERVER_PORT, 3306);
-	handle_db = mysql_connect(IP_DB, USER_DB, PASS_DB, NAME_DB,option_id);
+	handle_db = mysql_connect(IP_DB, USER_DB, PASS_DB, NAME_DB, option_id);
 	mysql_set_charset("latin1", handle_db);
 
 	if(mysql_errno(handle_db) == 0)
 	{
 		print("BASE DE DATOS CARGADA CORRECTAMENTE");
-		SetTimer("OnDatabaseConnected", 1000, false);
+		OnDatabaseConnected();
 	}
 	else
 	{
@@ -18865,7 +18869,7 @@ public ConnectDatabase()
 }
 
 forward OnDatabaseConnected();
-public OnDatabaseConnected() 
+stock OnDatabaseConnected() 
 {
 	SanAndreas();
 	LoadServerInfo();
@@ -21464,14 +21468,14 @@ forward server_loaded_request();
 public server_loaded_request()
 {
 	server_loaded = true;
-	SendRconCommandf("hostname "SERVER_HOSTNAME" [%s]", HostNames[ random(sizeof(HostNames)) ]);
+	SendRconCommandf("hostname "SERVER_HOSTNAME" !%s¡", HostNames[ random(sizeof(HostNames)) ]);
 	SendRconCommand("query 1");
 	return 1;
 }
 
 task RandomHostname[5000]()
 {
-	SendRconCommandf("hostname "SERVER_HOSTNAME" [%s]", HostNames[ random(sizeof(HostNames)) ]);
+	SendRconCommandf("hostname "SERVER_HOSTNAME" !%s¡", HostNames[ random(sizeof(HostNames)) ]);
 }
 
 GetCrewIndexById(id)
@@ -21655,6 +21659,12 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 			if(GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
 			{
 				VehicleEnterExitGarage(playerid);
+
+				if(IsPlayerInRangeOfPoint(playerid, 5.0, -602.2586, -508.6797, 25.2885))
+				{
+					PC_EmulateCommand(playerid, "/tuning");
+					return 1;
+				}
 
 				for(new i = 0; i != sizeof San_Andreas_Barriers; i ++)
 				{
@@ -24869,6 +24879,7 @@ public OnVehicleSpawn(vehicleid)
 		switch(WORK_VEHICLES[vehicleid][work_vehicle_WORK])
 		{
 			case WORK_TAXI: ResetVehicleTaxiMeter(vehicleid);
+			case WORK_MECHANIC: ClearTrailerInfo(vehicleid);
 			case WORK_TRUCK: ResetTruckInfo(vehicleid);
 			case WORK_TRAFFICKER: ResetTraffickerInfo(vehicleid);
 			case WORK_TRASH: ResetTrashInfo(vehicleid);
@@ -26412,7 +26423,7 @@ CMD:piezas(playerid, params[])
 			{
 				PI[playerid][pi_MECHANIC_PIECES] += params[0];
 				AddMechanicGaragePieces(params[0], true);
-				UpdateMechanicPiecesText3D();
+				UpdateMechanicPieces();
 				SendClientMessagef(playerid, -1, "Has comprado %s piezas por %s$, ahora tienes %s piezas.", number_format_thousand(params[0]), number_format_thousand(price), number_format_thousand(PI[playerid][pi_MECHANIC_PIECES]));
 			}
 			return 1;

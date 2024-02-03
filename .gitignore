@@ -1,0 +1,15 @@
+#Logs
+logs/
+*.log
+server_log.txt
+crashinfo.txt
+
+#executables
+announce.exe
+samp-npc.exe
+samp-server.exe
+
+#Compiled Files
+maps.amx
+main.amx
+gamemodes/main.amx

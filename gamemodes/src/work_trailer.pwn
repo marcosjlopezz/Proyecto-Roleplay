@@ -191,7 +191,7 @@ stock LoadTrailer(vehicleid, playerid)
     KillTimer(PlayerTemp[playerid][pt_TIMERS][9]);
     PlayerTemp[playerid][pt_TIMERS][9] = SetTimerEx("TrailerLoadUp", 1000, false, "ii", playerid, vehicleid);
 
-    SendMessage(playerid, "~g~La gandola se está preparando, si sales de élla se cancelará el viaje.");
+    SendInfoMessage(playerid, "Aviso~n~~n~La gandola se está preparando, si sales de élla se cancelará el viaje.~n~~n~");
     return 1;
 }
 
@@ -404,6 +404,7 @@ hook OnPlayerEnterDynamicCP(playerid, checkpointid)
 
 			if(GivePlayerCash(playerid, payment, true, false)) 
 			{
+                SendInfoMessagef(playerid, "Gandolero~n~~n~~g~+~y~1~w~ de Experiencia~n~~n~");
 				PLAYER_WORKS[playerid][WORK_TRAILER][pwork_LEVEL] ++;
 
 				new string[64];
@@ -616,7 +617,7 @@ CMD:rentar(playerid, params[])
             Trailer_Exit_Pos[1], 
             Trailer_Exit_Pos[2], 
             Trailer_Exit_Pos[3], 
-            1, 1, 
+            1, 0, 
             -1, false
         );
     
@@ -639,7 +640,7 @@ CMD:rentar(playerid, params[])
     gVehicle(vehicle_id)[gb_vehicle_DAMAGE_LIGHTS] = 0;
     gVehicle(vehicle_id)[gb_vehicle_DAMAGE_TIRES] = 0;
     gVehicle(vehicle_id)[gb_vehicle_COLOR_1] = 1;
-    gVehicle(vehicle_id)[gb_vehicle_COLOR_2] = 1;
+    gVehicle(vehicle_id)[gb_vehicle_COLOR_2] = 0;
     gVehicle(vehicle_id)[gb_vehicle_PAINTJOB] = 3; // No paintjob
     gVehicle(vehicle_id)[gb_vehicle_MAX_GAS] = VEHICLE_INFO[modelid - 400][vehicle_info_MAX_GAS];
     gVehicle(vehicle_id)[gb_vehicle_GAS] = gVehicle(vehicle_id)[gb_vehicle_MAX_GAS];
