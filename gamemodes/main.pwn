@@ -6537,7 +6537,7 @@ ptask TipMessages[TIP_MESSAGES_INTERVAL](playerid)
 {
 	if(pTemp(playerid)[pt_USER_LOGGED])
 	{
-		SendClientMessagef(playerid, YELLOW_COLOR2, "[Consejo] {d1d1d1}%s.", RandomTipsMessages[ random(sizeof(RandomTipsMessages)) ]);
+		SendClientMessagef(playerid, ORANGE_COLOR2, "[Consejo] {d1d1d1}%s.", RandomTipsMessages[ random(sizeof(RandomTipsMessages)) ]);
 	}
 }
 

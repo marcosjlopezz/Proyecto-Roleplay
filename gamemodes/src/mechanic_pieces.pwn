@@ -11,6 +11,8 @@ new Float:Mechanic_Pieces_Start_Work[] = {-587.7748, -517.3298, 25.5441, 270.0};
 new Float:Mechanic_Pieces_Trailer[] = {-595.5101, -516.7543, 26.2011, 270.0};
 new Float:Mechanic_Pieces_Truck[] = {-586.4796, -517.2444, 26.5648, 270.0};
 
+new MechanicForkLiftPieces[MAX_VEHICLES] = 0;
+
 new Float:Mechanic_Pieces_Routes[][] = 
 {
 	{-1733.8464, 155.5775, 3.5547}, //sf
@@ -22,6 +24,25 @@ stock IsVehicleForkLift(vehicleid)
 {
 	if(GetVehicleModel(vehicleid) == VEHICLE_FORKLIFT) return 1;
 	return 0;
+}
+
+stock SetMechanicCrate(vehicleid)
+{
+	if(!IsVehicleForkLift(vehicleid)) return 0;
+	DestroyDynamicObject(GLOBAL_VEHICLES[vehicleid][gb_vehicle_OBJECTID]);
+	GLOBAL_VEHICLES[vehicleid][gb_vehicle_OBJECTID] = INVALID_STREAMER_ID;
+
+	GLOBAL_VEHICLES[vehicleid][gb_vehicle_OBJECTID] = CreateDynamicObject(2912, 0.0, 0.0, -1000.0, 0.0, 0.0, 0.0, -1, -1, -1, 300.0, 300.0);
+    AttachDynamicObjectToVehicle(GLOBAL_VEHICLES[vehicleid][gb_vehicle_OBJECTID], vehicleid, -0.010, 0.639, -0.050, 0.000, 0.000, 0.000);
+	return 1;
+}
+
+stock RemoveMechanicCrate(vehicleid)
+{
+	if(!IsVehicleForkLift(vehicleid)) return 0;
+	DestroyDynamicObject(GLOBAL_VEHICLES[vehicleid][gb_vehicle_OBJECTID]);
+	GLOBAL_VEHICLES[vehicleid][gb_vehicle_OBJECTID] = INVALID_STREAMER_ID;
+	return 1;
 }
 
 stock UpdateMechanicPieces()
@@ -109,6 +130,53 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 {
 	if(newkeys & KEY_CROUCH)
 	{
+		Loop(i, sizeof(MechanicPiecesForklift), 0)
+		{
+			if(IsPlayerInRangeOfPoint(playerid, 5.0, MechanicPiecesForklift[i][0], MechanicPiecesForklift[i][1], MechanicPiecesForklift[i][2]))
+			{
+				if(GetPlayerWork(playerid, WORK_MECHANIC))
+				{
+					if(GetPlayerState(playerid) != PLAYER_STATE_DRIVER) return 1;
+					new vehicleid = GetPlayerVehicleID(playerid);
+					if(!IsVehicleForkLift(vehicleid)) return 1;
+					if(MECHANIC_STOCK_PIECES <= 0) return 1;
+					if(MechanicForkLiftPieces[vehicleid] >= 100) return 1;
+
+					MechanicForkLiftPieces[vehicleid] += 100;
+					MECHANIC_STOCK_PIECES -= 100;
+					UpdateCrateMechanicPieces();
+
+					SetMechanicCrate(vehicleid);
+					SendMessage(playerid, "Lleva las piezas dentro del taller.");
+				}
+				return Y_HOOKS_BREAK_RETURN_1;
+			}
+		}
+
+		Loop(i, sizeof(MechanicGaragePieces), 0)
+		{
+			if(IsPlayerInRangeOfPoint(playerid, 5.0, MechanicGaragePieces[i][0], MechanicGaragePieces[i][1], MechanicGaragePieces[i][2]))
+			{
+				if(GetPlayerWork(playerid, WORK_MECHANIC))
+				{
+					if(GetPlayerState(playerid) != PLAYER_STATE_DRIVER) return 1;
+					new vehicleid = GetPlayerVehicleID(playerid);
+					if(!IsVehicleForkLift(vehicleid)) return 1;
+					if(MechanicForkLiftPieces[vehicleid] <= 0) return 1;
+
+					MechanicForkLiftPieces[vehicleid] -= 100;
+					if(MechanicForkLiftPieces[vehicleid] <= 0) RemoveMechanicCrate(vehicleid);
+
+					MECHANIC_GARAGE_PIECES += 100;
+					UpdateMechanicPieces();
+
+					SendMessage(playerid, "Bien hecho, has ganado 100$.");
+					GivePlayerCash(playerid, 100, true, false);
+				}
+				return Y_HOOKS_BREAK_RETURN_1;
+			}
+		}
+
 		if(IsPlayerInRangeOfPoint(playerid, 15.0, Mechanic_Pieces_Start_Work[0], Mechanic_Pieces_Start_Work[1], Mechanic_Pieces_Start_Work[2]))
 		{
             if(GetPlayerWork(playerid, WORK_TRAILER) || GetPlayerWork(playerid, WORK_MECHANIC))
