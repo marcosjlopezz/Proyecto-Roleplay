@@ -4,6 +4,10 @@ logs/
 server_log.txt
 crashinfo.txt
 
+#Others
+*.ink
+savedpositions.txt.lnk
+
 #executables
 announce.exe
 samp-npc.exe
