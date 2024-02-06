@@ -41,13 +41,13 @@ AntiAmx()
 
 #define SERVER_VERSION			"1.0"
 
-#define SERVER_NAME				"Hao Roleplay"
-#define SERVER_SHORT_NAME		"Hao"
+#define SERVER_NAME				"Gamemode Roleplay"
+#define SERVER_SHORT_NAME		"Gamemode"
 
 #define SERVER_GAMEMODE			"Roleplay en Español"
 #define SERVER_LANGUAGE			"Español - Spanish"
 #define SERVER_WEBSITE			"www.sa-mp.mp"
-#define SERVER_HOSTNAME 		"(ESP) "SERVER_NAME" |"
+#define SERVER_HOSTNAME 		"(ESP) "SERVER_NAME" |" //no pongan nada aca ya que el sv tiene sistema de hostname random
 
 #define SERVER_COIN				"Gemas"
 
@@ -167,9 +167,9 @@ new //Sistema economia
 
 new RandomTipsMessages[][] =
 {
-	"Si tienes hambre puedes pedir un repartidor de comida.",
+	"Si tienes hambre puedes pedir un repartidor de comida",
 	"Los mecanicos pueden hacer domicilios, /llamar mecanico",
-	"Si no tienes un trailer para gandolero, lo puedes rentar",
+	"Si no tienes un trailer para Trailero, lo puedes rentar",
 	"Hay cajeros y puestos de comida en todos los trabajos"
 };
 
@@ -177,9 +177,11 @@ new HostNames[][] =
 {
 	"Faccion Mecanicos",
 	"Traficante",
-	"Gandolero",
+	"Trailero",
 	"Encargos de Piezas",
-	"Optimized"
+	"Optimized",
+	"Policia",
+	"Sistema Taser"
 };
 
 #define PRESSED(%0) (((newkeys & (%0)) == (%0)) && ((oldkeys & (%0)) != (%0)))
@@ -515,7 +517,11 @@ enum
 	DIALOG_SV_PRICE,
 	DIALOG_SV_SELECT_PRICE, //coins o dinero
 	DIALOG_SV_SET_LEVEL,
-	DIALOG_SV_SHOP
+	DIALOG_SV_SHOP,
+	DIALOG_BLACK_MARKET,
+	DIALOG_BLACK_MARKET_ARTICLES,
+	DIALOG_BLACK_MARKET_WEAPON,
+	DIALOG_BLACK_MARKET_AMMO
 }
 
 enum
@@ -771,7 +777,7 @@ new work_info[][work_info_info] =
 	{WORK_TYPE_FAMILY, 8, "Policía", true, 3000, 1, 0},
 	{WORK_TYPE_NORMAL, 1, "Pizzero", true, 0, 0, 0},
 	{WORK_TYPE_NORMAL, 2, "Médico", true, 0, 0, 0},
-	{WORK_TYPE_NORMAL, 1, "Gandolero", false, 1500, 25, 7300},
+	{WORK_TYPE_NORMAL, 1, "Trailero", false, 1500, 25, 7300},
 	{WORK_TYPE_NORMAL, 7, "Traficante", false, 0, 0, 0}
 };
 forward OnPlayerObtainWork(playerid, work);
@@ -1046,7 +1052,7 @@ new Float:obtain_work_coords[][obtain_work_coords_info] =
 	{true, true, -510.972015, 324.242736, 2004.585937, 20,	false, 0, 1480.966918, -1772.065673, 18.795755}, // policía
 	{true, true, 377.902313, -119.416114, 1001.492187, 5, false, 0, 2105.485107, -1806.400878, 13.554687},
 	{true, true, -2033.237304, -117.411125, 1035.171875, 3,	false, 0, 0.0, 0.0, 0.0}, //medico
-	{true, true, 1040.164428, 1304.031738, 10.820312, 0, true, 51, 1040.164428, 1304.031738, 10.820312}, //gandolero
+	{true, true, 1040.164428, 1304.031738, 10.820312, 0, true, 51, 1040.164428, 1304.031738, 10.820312}, //Trailero
 	{true, true, 1684.795898, 1080.381347, 10.820312, 0, true, 51, 1684.795898, 1080.381347, 10.820312} //traficante
 };
 
@@ -2916,7 +2922,9 @@ enum enum_PT
 	pt_SV_EXTRA,
 	pt_SV_SHOP,
 	pt_TRAILER_CHECKPOINT,
-	pt_RENT_VEHICLE
+	pt_RENT_VEHICLE,
+	bool:pt_POLICE_HELP,
+	pt_BM_SELECTED_WEAPON
 };
 new PlayerTemp[MAX_PLAYERS][enum_PT];
 
@@ -2976,7 +2984,8 @@ enum
 	INTERIOR_HOSPITAL,
 	INTERIOR_POLICE_DISPENSARY_LS,
 	INTERIOR_POLICE_DISPENSARY_SF,
-	INTERIOR_POLICE_DISPENSARY_LV
+	INTERIOR_POLICE_DISPENSARY_LV,
+	INTERIOR_BLACKMARKET
 }
 enum Enter_Exits
 {
@@ -3113,7 +3122,8 @@ new ENTER_EXIT[][Enter_Exits] = // EE = EnterExits
 	{-1, false, 0, INVALID_ACTOR_ID, -1, Text:INVALID_TEXT_DRAW, 0, -1, 0.0, -1, "Hospital", INTERIOR_HOSPITAL, -1, false, 8, 3, -2029.700683, -119.617759, 1035.171875, 0.0, 22, false, 0, 0,	1583.311401, 1768.952758, 10.820312, 90.0	, 0, 0, -1, -1, Text3D:INVALID_3DTEXT_ID, Text3D:INVALID_3DTEXT_ID, -1, -1, INVALID_OBJECT_ID},
 	{-1, false, 0, INVALID_ACTOR_ID, -1, Text:INVALID_TEXT_DRAW, 0, -1, 0.0, -1, "Dispensario Policía Los Santos", INTERIOR_POLICE_DISPENSARY_LS, -1, false, 1, 5, 322.2996, 302.3666, 999.1484, 350.2226, -1, false, 0, 0, 1524.4863, -1678.1053, 6.2188, 269.1525, 0, 0, -1, -1, Text3D:INVALID_3DTEXT_ID, Text3D:INVALID_3DTEXT_ID, -1, -1, INVALID_OBJECT_ID},
 	{-1, false, 0, INVALID_ACTOR_ID, -1, Text:INVALID_TEXT_DRAW, 0, -1, 0.0, -1, "Dispensario Policía San Fierro", INTERIOR_POLICE_DISPENSARY_LV, -1, false, 2, 5, 322.2996, 302.3666, 999.1484, 350.2226, -1, false, 0, 0, -1606.4724, 672.0643, -4.9063, 356.7417, 0, 0, -1, -1, Text3D:INVALID_3DTEXT_ID, Text3D:INVALID_3DTEXT_ID, -1, -1, INVALID_OBJECT_ID},
-	{-1, false, 0, INVALID_ACTOR_ID, -1, Text:INVALID_TEXT_DRAW, 0, -1, 0.0, -1, "Dispensario Policía Las Venturas", INTERIOR_POLICE_DISPENSARY_SF, -1, false, 3, 5, 322.2996, 302.3666, 999.1484, 350.2226, -1, false, 0, 0, 2268.2654, 2449.2861, 3.5313, 179.2697, 0, 0, -1, -1, Text3D:INVALID_3DTEXT_ID, Text3D:INVALID_3DTEXT_ID, -1, -1, INVALID_OBJECT_ID}
+	{-1, false, 0, INVALID_ACTOR_ID, -1, Text:INVALID_TEXT_DRAW, 0, -1, 0.0, -1, "Dispensario Policía Las Venturas", INTERIOR_POLICE_DISPENSARY_SF, -1, false, 3, 5, 322.2996, 302.3666, 999.1484, 350.2226, -1, false, 0, 0, 2268.2654, 2449.2861, 3.5313, 179.2697, 0, 0, -1, -1, Text3D:INVALID_3DTEXT_ID, Text3D:INVALID_3DTEXT_ID, -1, -1, INVALID_OBJECT_ID},
+	{-1, false, 0, INVALID_ACTOR_ID, -1, Text:INVALID_TEXT_DRAW, 0, -1, 0.0, -1, "Mercado Negro", INTERIOR_BLACKMARKET, -1, false, 1, 6, 296.8741, -111.9642, 1001.5156, 2.6757, -1, false, 0, 0, 2314.9795, 56.2875, 26.4813, 90.0, 0, 0, -1, -1, Text3D:INVALID_3DTEXT_ID, Text3D:INVALID_3DTEXT_ID, -1, -1, INVALID_OBJECT_ID}
 }; 
 
 enum enum_JAIL_POSITIONS
@@ -4166,6 +4176,7 @@ public OnPlayerConnect(playerid)
 	pTemp(playerid)[pt_GARAGE_INDEX] = -1;
 	pTemp(playerid)[pt_TRAILER_CHECKPOINT] = INVALID_STREAMER_ID;
 	pTemp(playerid)[pt_RENT_VEHICLE] = INVALID_VEHICLE_ID;
+	pTemp(playerid)[pt_POLICE_HELP] = false;
 	for(new i = 0; i != MAX_OBJECTS_PER_ROUTE; i ++) TRASH_PLAYER_OBJECTS[playerid][i] = INVALID_STREAMER_ID;
 	
 	GetPlayerName(playerid, pTemp(playerid)[pt_NAME], 24);
@@ -4286,7 +4297,7 @@ public OnPlayerDisconnect(playerid, reason)
 			if(pTemp(playerid)[pt_IN_TUNING_GARAGE])
 			{
 				pTemp(playerid)[pt_IN_TUNING_GARAGE] = false;
-				SetVehiclePosEx(pTemp(playerid)[pt_TUNING_GARAGE_VEHICLEID], -610.9049, -515.7297, 25.2885);
+				SetVehiclePosEx(pTemp(playerid)[pt_TUNING_GARAGE_VEHICLEID], -610.9049, -515.7297, 27.0);
 				SetVehicleZAngle(pTemp(playerid)[pt_TUNING_GARAGE_VEHICLEID], 0.0);
 				SetVehicleVelocity(pTemp(playerid)[pt_TUNING_GARAGE_VEHICLEID], 0.0, 0.0, 0.0);
 				SetVehicleVirtualWorldEx(pTemp(playerid)[pt_TUNING_GARAGE_VEHICLEID], 0);
@@ -4425,7 +4436,7 @@ public OnPlayerSpawn(playerid)
 		
 		if(PI[playerid][pi_CREW]) SetPlayerGangZones(playerid);
 		SetPlayerSkillLevels(playerid);
-		SetWantedMarkerToPolice(playerid);
+		SetWantedMarkerToFactions(playerid);
 		ApplyAnimation(playerid,"SWAT","null",0.0,0,0,0,0,0);
 		ApplyAnimation(playerid,"MEDIC","null",0.0,0,0,0,0,0);
 		ApplyAnimation(playerid,"SHOP","null",0.0,0,0,0,0,0);
@@ -4951,7 +4962,7 @@ hook OnPlayerDeath(playerid, killerid, reason)
 	{
 		pTemp(playerid)[pt_IN_TUNING_GARAGE] = false;
 		SetVehicleVirtualWorldEx(pTemp(playerid)[pt_TUNING_GARAGE_VEHICLEID], 0);
-		SetVehiclePosEx(pTemp(playerid)[pt_TUNING_GARAGE_VEHICLEID], -610.9049, -515.7297, 25.2885);
+		SetVehiclePosEx(pTemp(playerid)[pt_TUNING_GARAGE_VEHICLEID], -610.9049, -515.7297, 27.0);
 		SetVehicleZAngle(pTemp(playerid)[pt_TUNING_GARAGE_VEHICLEID], 0.0);
 	}
 
@@ -8291,7 +8302,7 @@ CMD:gasolina(playerid, params[])
 			{
 				if(IsVehicleTrailer_Truck(vehicleid))
 				{
-					SendInfoMessage(playerid, "Gandolero~n~~n~La gandola de la compañia cubrira los gastos de la gasolina.~n~~n~");
+					SendInfoMessage(playerid, "Trailero~n~~n~el trailer de la compañia cubrira los gastos de la gasolina.~n~~n~");
 					price = 0;
 				}
 			}
@@ -8331,7 +8342,7 @@ CMD:gasolina(playerid, params[])
 				{
 					if(IsVehicleTrailer_Truck(vehicleid))
 					{
-						SendInfoMessage(playerid, "Gandolero~n~~n~La gandola de la compañia cubrira los gastos de la gasolina.~n~~n~");
+						SendInfoMessage(playerid, "Trailero~n~~n~el trailer de la compañia cubrira los gastos de la gasolina.~n~~n~");
 						price = 0;
 					}
 				}
@@ -17400,7 +17411,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				pTemp(playerid)[pt_IN_TUNING_GARAGE] = false;
 				SetVehicleVirtualWorldEx(pTemp(playerid)[pt_TUNING_GARAGE_VEHICLEID], 0);
 				SetPlayerVirtualWorld(playerid, 0);
-				SetVehiclePosEx(pTemp(playerid)[pt_TUNING_GARAGE_VEHICLEID], -610.9049, -515.7297, 25.2885);
+				SetVehiclePosEx(pTemp(playerid)[pt_TUNING_GARAGE_VEHICLEID], -610.9049, -515.7297, 27.0);
 				SetVehicleZAngle(pTemp(playerid)[pt_TUNING_GARAGE_VEHICLEID], 0.0);
 				
 				GLOBAL_VEHICLES[ pTemp(playerid)[pt_TUNING_GARAGE_VEHICLEID] ][gb_vehicle_PARAMS_ENGINE] = 1;
@@ -25599,15 +25610,15 @@ CMD:motor(playerid, params[])
 					{
 						if(IsVehicleTrailer_Truck(vehicleid))
 						{
-							SendInfoMessage(playerid, "Gandolero~n~~n~Para encender esta gandola primero debes rentarla.~n~~n~");
+							SendInfoMessage(playerid, "Trailero~n~~n~Para encender este trailer primero debes rentarla.~n~~n~");
 							return 1;
 						}
 					}
 				}
 			}
 
-			if(GetTrailerInfoLoading(vehicleid)) return SendInfoMessage(playerid, "Aviso~n~~n~Espera a que el trailer se cargue para encender la gandola~n~~n~");
-			if(GetTrailerInfoUnLoading(vehicleid)) return SendInfoMessage(playerid, "Aviso~n~~n~Espera a que el trailer se descargue para encender la gandola~n~~n~");
+			if(GetTrailerInfoLoading(vehicleid)) return SendInfoMessage(playerid, "Aviso~n~~n~Espera a que el trailer se cargue para encender el trailer~n~~n~");
+			if(GetTrailerInfoUnLoading(vehicleid)) return SendInfoMessage(playerid, "Aviso~n~~n~Espera a que el trailer se descargue para encender el trailer~n~~n~");
 		}
 		
 		KillTimer(pTemp(playerid)[pt_TIMERS][7]);
@@ -26422,8 +26433,7 @@ CMD:piezas(playerid, params[])
 			if(GivePlayerCash(playerid, -price, true, true)) 
 			{
 				PI[playerid][pi_MECHANIC_PIECES] += params[0];
-				AddMechanicGaragePieces(params[0], true);
-				UpdateMechanicPieces();
+				AddMechanicGaragePieces(-params[0], true);
 				SendClientMessagef(playerid, -1, "Has comprado %s piezas por %s$, ahora tienes %s piezas.", number_format_thousand(params[0]), number_format_thousand(price), number_format_thousand(PI[playerid][pi_MECHANIC_PIECES]));
 			}
 			return 1;
@@ -28763,12 +28773,12 @@ CMD:nivel(playerid, params[])
 	if(PLAYER_WORKS[params[0]][WORK_POLICE][pwork_SET]) return SendClientMessagef(playerid, -1, "Este jugador es policía.");
 	if(PI[params[0]][pi_STATE] == ROLEPLAY_STATE_JAIL) return SendClientMessagef(playerid, -1, "Esta persona está en la cárcel.");
 
-	//new Float:pos[3]; GetPlayerPos(params[0], pos[0], pos[1], pos[2]);
-	//if(!IsPlayerInRangeOfPoint(playerid, 100.0, pos[0], pos[1], pos[2])) return SendClientMessagef(playerid, -1, "Este jugador no está cerca tuya. (A más de 100 metros)");
+	new Float:pos[3]; GetPlayerPos(params[0], pos[0], pos[1], pos[2]);
+	if(!IsPlayerInRangeOfPoint(playerid, 100.0, pos[0], pos[1], pos[2])) return SendClientMessagef(playerid, -1, "Este jugador no está cerca tuya. (A más de 100 metros)");
 
 	new 
-		action[64],
-		message[145];
+		action[145],
+		message[445];
 
 	if(params[1] == 0)
 	{
@@ -28922,16 +28932,8 @@ CMD:requisar(playerid, params[])
 CMD:ref(playerid, params[])
 {
 	if(PI[playerid][pi_CREW]) return Crew_RequestHelp(playerid, PI[playerid][pi_CREW]);
-
-	if(!PLAYER_WORKS[playerid][WORK_POLICE][pwork_SET]) return SendMessage(playerid, "~r~No eres policía.");
-	if(pTemp(playerid)[pt_WORKING_IN] != WORK_POLICE) return SendClientMessagef(playerid, -1, "No estás de servicio como policía.");
-	
-	new city[45], zone[45];
-	GetPlayerZones(playerid, city, zone);
-		
-	new message[145];
-	format(message, sizeof message, "{"#POLICE_COLOR"}[Central policía] {FFFFFF}%s %s necesita refuerzos en {"#POLICE_COLOR"}%s, %s.", POLICE_RANKS[ PLAYER_WORKS[playerid][WORK_POLICE][pwork_LEVEL] ], pTemp(playerid)[pt_NAME], city, zone);
-	SendPoliceRadioMessage(-1, -1, message);
+	if(PLAYER_WORKS[playerid][WORK_POLICE][pwork_SET]) return Police_RequestHelp(playerid);
+	SendMessage(playerid, "~r~No eres policía o no estas eun una banda.");
 	return 1;
 }
 alias:ref("refuerzos");
@@ -29598,7 +29600,7 @@ SetPlayerWantedLevelEx(playerid, level)
 	else
 	{
 		pTemp(playerid)[pt_LAST_SET_WANTED_LEVEL] = gettime();
-		SetWantedMarkerToPolice(playerid);
+		SetWantedMarkerToFactions(playerid);
 	}
 	return 1;
 }
@@ -29730,7 +29732,7 @@ Crew_RequestHelp(playerid, crew_id)
 
 		pTemp(playerid)[pt_CREW_HELP] = true;
 
-		Auto_SendPlayerAction(playerid, "enciende su localizador y ahora toda su banda saben donde esta.");
+		Auto_SendPlayerAction(playerid, "enciende su localizador.");
 	}
 	else
 	{
@@ -29757,7 +29759,97 @@ Crew_RequestHelp(playerid, crew_id)
 	return 1;
 }
 
-SetWantedMarkerToPolice(playerid)
+Police_RequestHelp(playerid)
+{
+	if(pTemp(playerid)[pt_WORKING_IN] != WORK_POLICE) return SendMessage(playerid, "No estas de servicio como policia.");
+
+	new
+		city[45],
+		zone[45],
+		message[445];
+
+	GetPlayerZones(playerid, city, zone);
+
+	if(!pTemp(playerid)[pt_POLICE_HELP])
+	{
+		LoopEx(i, MAX_PLAYERS, 0)
+		{
+			if(IsPlayerConnected(i))
+			{
+				if(PlayerTemp[i][pt_GAME_STATE] == GAME_STATE_NORMAL)
+				{
+					if(i == playerid) continue;
+					if(!PLAYER_WORKS[i][WORK_POLICE][pwork_SET]) continue;
+					if(PlayerTemp[i][pt_WORKING_IN] != WORK_POLICE) continue;
+					
+					SetPlayerMarkerForPlayer(i, playerid, POLICE_COLOR2);
+				}
+			}
+		}
+		format(message, sizeof message, "{"#POLICE_COLOR"}[Central policía] {FFFFFF}el %s %s está pidiendo refuerzos en {"#POLICE_COLOR"}%s, %s.", POLICE_RANKS[ GetPlayerWorkLevel(playerid, WORK_POLICE) ], pTemp(playerid)[pt_NAME], city, zone);
+		SendPoliceRadioMessage(-1, -1, message);
+
+		pTemp(playerid)[pt_POLICE_HELP] = true;
+
+		Auto_SendPlayerAction(playerid, "enciende su localizador.");
+	}
+	else
+	{
+		LoopEx(i, MAX_PLAYERS, 0)
+		{
+			if(IsPlayerConnected(i))
+			{
+				if(PlayerTemp[i][pt_GAME_STATE] == GAME_STATE_NORMAL)
+				{
+					if(i == playerid) continue;
+					if(!PLAYER_WORKS[i][WORK_POLICE][pwork_SET]) continue;
+					if(PlayerTemp[i][pt_WORKING_IN] != WORK_POLICE) continue;
+					
+					SetPlayerMarkerForPlayer(i, playerid, POLICE_PLAYER_COLOR);
+				}
+			}
+		}
+		format(message, sizeof message, "{"#POLICE_COLOR"}[Central policía] {FFFFFF}%s ya no necesita refuerzos.", pTemp(playerid)[pt_NAME]);
+		SendPoliceRadioMessage(-1, -1, message);
+
+		pTemp(playerid)[pt_POLICE_HELP] = false;
+
+		Auto_SendPlayerAction(playerid, "apaga su localizador.");
+	}
+	return 1;
+}
+
+ptask UpdatePlayerNameColour[5000](playerid)
+{
+	if(pTemp(playerid)[pt_USER_LOGGED])
+	{
+		if(GetPlayerWork(playerid, WORK_POLICE))
+		{
+			if(IsPlayerWorking(playerid, WORK_POLICE))
+			{
+				LoopEx(i, MAX_PLAYERS, 0)
+				{
+					if(IsPlayerConnected(i))
+					{
+						if(PlayerTemp[i][pt_GAME_STATE] == GAME_STATE_NORMAL)
+						{
+							if(i == playerid) continue;
+							if(!PLAYER_WORKS[i][WORK_POLICE][pwork_SET]) continue;
+							if(PlayerTemp[i][pt_WORKING_IN] != WORK_POLICE) continue;
+							
+							if(pTemp(playerid)[pt_POLICE_HELP]) SetPlayerMarkerForPlayer(i, playerid, POLICE_COLOR2);
+							else SetPlayerMarkerForPlayer(i, playerid, POLICE_PLAYER_COLOR);
+						}
+					}
+				}
+			}
+		}
+
+		if(PI[playerid][pi_WANTED_LEVEL]) SetWantedMarkerToFactions(playerid);
+	}
+}
+
+SetWantedMarkerToFactions(playerid)
 {
 	LoopEx(i, MAX_PLAYERS, 0)
 	{
@@ -32442,7 +32534,7 @@ public StartPlayerJob(playerid, work, vehicleid)
 			{
 				SetPlayerTrailerCheckpoint(playerid, vehicleid);
 			}
-			else SendMessage(playerid, "Para comenzar a trabajar prepara la gandola en los ~r~Puntos de carga.");
+			else SendMessage(playerid, "Para comenzar a trabajar prepara el trailer en los ~r~Puntos de carga.");
 		}
 		case WORK_TRAFFICKER:
 		{
@@ -33947,7 +34039,7 @@ CMD:tuning(playerid, params[])
 	pTemp(playerid)[pt_IN_TUNING_GARAGE] = true;
 	pTemp(playerid)[pt_TUNING_GARAGE_VEHICLEID] = vehicleid;
 	
-	SetVehiclePosEx(vehicleid, -610.9049, -515.7297, 25.2885);
+	SetVehiclePosEx(vehicleid, -610.9049, -515.7297, 27.0);
 	SetVehicleZAngle(vehicleid, 0.0);
 	SetVehicleVelocity(vehicleid, 0.0, 0.0, 0.0);
 	SetVehicleVirtualWorldEx(vehicleid, playerid + MAX_PLAYERS);
@@ -36227,3 +36319,4 @@ stock GetNearVehicle(playerid, Float:fDis = 5.0)
 #include "src/info_message.pwn"
 #include "src/work_trailer.pwn"
 #include "src/mechanic_pieces.pwn"
+#include "src/black_market.pwn"

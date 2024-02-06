@@ -34,106 +34,106 @@ new Random_Trailer_ModelID[] = {435, 450, 584, 591};
 };*/
 new Float:Trailer_Routes[][] = 
 {
-    {558.4927, 1679.2808, 8.0128, 122.5777}, //Gandolero 1
-    {827.8138, 881.7650, 14.3430, 21.1239}, //Gandolero 2
-    {2850.3525, 908.9291, 11.7713, 270.7846}, //Gandolero 3
-    {2890.7815, 2389.9792, 11.8417, 0.4900}, //Gandolero 4
-    {2249.2656, 2749.4431, 11.8354, 359.4870}, //Gandolero 5
-    {2126.3796, 2720.2888, 11.8393, 179.7311}, //Gandolero 6
-    {1362.7999, 2663.8103, 11.8392, 271.8498}, //Gandolero 7
-    {-274.3815, 2729.2820, 63.4319, 267.6748}, //Gandolero 8
-    {1610.4584, 1313.9775, 11.8470, 178.7200}, //Gandolero 9
-    {1645.5739, 1608.5126, 11.8432, 268.9828}, //Gandolero 10
-    {2615.0969, 1667.1990, 11.8318, 269.9151}, //Gandolero 11
-    {2549.2593, 1807.7865, 11.8388, 89.4350}, //Gandolero 12
-    {2724.6189, 844.2164, 11.7690, 180.5505}, //Gandolero 13
-    {1880.7380, 2244.4578, 11.8386, 88.2979}, //Gandolero 14
-    {2042.7708, 2226.7466, 11.8402, 181.2429}, //Gandolero 15
-    {2279.2534, -81.8274, 27.5412, 177.5374}, //Gandolero 16
-    {2437.2944, 114.2882, 27.4920, 90.4098}, //Gandolero 17
-    {1367.7606, 461.8178, 20.9980, 65.0816}, //Gandolero 18
-    {1209.7925, 191.2797, 21.2085, 336.6670}, //Gandolero 19
-    {1307.6132, 375.6104, 20.4282, 67.1695}, //Gandolero 20
-    {152.9368, -68.8402, 2.4487, 90.7148}, //Gandolero 21
-    {88.8455, -204.2908, 2.6110, 87.8179}, //Gandolero 22
-    {44.3642, -241.6651, 2.6803, 175.8287}, //Gandolero 23
-    {-69.2813, -35.4487, 4.1362, 341.2289}, //Gandolero 24
-    {-96.8090, -386.2839, 2.4490, 263.2885}, //Gandolero 25
-    {163.3313, -287.4623, 2.5958, 65.2118}, //Gandolero 26
-    {313.1518, -239.6511, 2.5935, 178.3203}, //Gandolero 27
-    {326.3068, -39.6793, 2.5690, 0.7595}, //Gandolero 28
-    {-2093.0825, -2243.2732, 31.8301, 321.6132}, //Gandolero 29
-    {-2135.9666, -2257.6240, 31.6513, 52.5531}, //Gandolero 30
-    {-2195.7971, -2435.7605, 31.6449, 231.5589}, //Gandolero 31
-    {-2118.3584, -2497.0642, 31.6441, 231.6839}, //Gandolero 32
-    {-1922.8378, -2454.3760, 31.7175, 316.5790}, //Gandolero 33
-    {-1551.8149, -2766.1025, 49.5532, 236.5401}, //Gandolero 34
-    {-2105.9285, 208.1850, 36.2788, 89.7496}, //Gandolero 35
-    {-2308.8091, -89.2265, 36.3376, 359.9427}, //Gandolero 36
-    {-1730.9799, 121.4336, 4.5718, 1.3455}, //Gandolero 37
-    {-1843.6483, 170.9646, 16.1343, 90.1068}, //Gandolero 38
-    {-1669.5988, 404.9354, 8.1920, 315.3907}, //Gandolero 39
-    {-1865.7761, 1412.2562, 8.1620, 49.0574}, //Gandolero 40
-    {-2642.6821, 1340.4335, 8.1782, 179.8738}, //Gandolero 41
-    {-2430.8176, 2313.5654, 6.0011, 359.9703}, //Gandolero 42
-    {-2295.5571, 2410.5942, 5.9305, 44.0802}, //Gandolero 43
-    {-857.4033, 1556.0908, 24.9709, 180.5035}, //Gandolero 44
-    {-796.3324, 1617.3398, 28.1337, 85.1608}, //Gandolero 45
-    {-1471.2135, 1854.7775, 33.6935, 95.7032}, //Gandolero 46
-    {-1927.7935, 2384.6877, 50.5107, 21.6168}, //Gandolero 47
-    {1444.5186, 992.1268, 11.8393, 269.6013}, //Gandolero 48
-    {1444.7036, 1107.3566, 11.8412, 89.8653}, //Gandolero 49
-    {1298.7842, 1104.6729, 11.8285, 179.7289}, //Gandolero 50
-    {2751.0627, -2479.7747, 14.6688, 180.4993}, //Gandolero 51
-    {2620.0862, -2448.0486, 14.6542, 90.2243}, //Gandolero 52
-    {2692.0007, -2452.2864, 14.6566, 180.0571}, //Gandolero 53
-    {2455.8506, -2544.3706, 14.6748, 179.4531}, //Gandolero 54
-    {2299.7256, -2383.6880, 14.5659, 313.7910}, //Gandolero 55
-    {1923.3036, -1791.2782, 14.4037, 89.6247}, //Gandolero 56
-    {1776.2915, -2033.5527, 14.5290, 180.8559}, //Gandolero 57
-    {1699.1205, -1519.9158, 14.4059, 180.9468}, //Gandolero 58
-    {1601.4895, -1551.4532, 14.6035, 90.3844}, //Gandolero 59
-    {1480.5985, -1497.3898, 14.5694, 90.5657}, //Gandolero 60
-    {994.1107, -1365.0601, 14.3543, 359.2578}, //Gandolero 61
-    {808.2496, -608.0873, 17.3560, 270.4110}, //Gandolero 62
-    {658.9498, -559.1866, 17.3460, 359.3984}, //Gandolero 63
-    {1129.8074, -1207.6315, 19.2264, 271.1347}, //Gandolero 64
-    {1142.0723, -1342.5970, 14.6779, 179.9607}, //Gandolero 65
-    {598.9575, -1508.8009, 16.1087, 90.6074}, //Gandolero 66
-    {2475.1448, -1783.7399, 14.5796, 269.9936}, //Gandolero 67
-    {2331.9531, -2096.9490, 14.5660, 89.4502}, //Gandolero 68
-    {1931.2935, -2105.1753, 14.5935, 90.2296}, //Gandolero 69
-    {1338.0511, -885.1326, 39.4267, 359.8221}, //Gandolero 70
-    {403.8020, -1309.4276, 15.9160, 30.1343}, //Gandolero 71
-    {2170.5122, -2653.0955, 14.5659, 89.9862}, //Gandolero 72
-    {2513.8889, -2434.4111, 14.6308, 224.8943}, //Gandolero 73
-    {2679.2856, -2531.1782, 14.3743, 178.7513}, //Gandolero 74
-    {-1041.4867, -1182.8142, 129.9834, 1.3370}, //Gandole 75
-    {-571.7838, -533.0566, 26.5615, 178.3518}, //Gandole 76
-    {-99.3453, -1165.3184, 3.4665, 155.0169}, //Gandole 77
-    {2147.4160, -1177.9784, 24.8444, 180.8930}, //Gandole 78
-    {2036.7620, -1939.7360, 14.3525, 269.6179}, //Gandole 79
-    {2347.8213, -2001.9399, 14.4964, 177.4007}, //Gandole 80
-    {1594.1896, 2187.6416, 11.8384, 270.5564}, //Gandole 81
-    {1670.2050, 2211.2637, 11.8324, 359.4204}, //Gandole 82
-    {2204.9077, 2014.6293, 11.8338, 271.4988}, //Gandole 83
-    {2371.7708, 2547.9844, 11.8326, 0.0054}, //Gandole 84
-    {1514.9182, 2370.2405, 11.8421, 271.3715}, //Gandole 85
-    {1745.4080, 2220.5374, 11.8282, 341.2933}, //Gandolero 86
-    {2557.1677, 1047.1879, 11.8341, 179.1602}, //Gandolero 87
-    {2402.7727, 1032.2003, 11.8311, 91.8528}, //Gandolero 88
-    {1979.4930, 2454.7139, 11.8327, 357.3623}, //Gandolero 89
-    {-546.7468, -86.6275, 64.4183, 83.0518}, //Gandolero 90
-    {636.0937, 1210.4792, 12.7355, 274.7817}, //Gandolero 91
-    {275.4961, 1355.5228, 11.6055, 178.5724}, //Gandolero 92
-    {-2856.3665, 1034.6874, 36.8642, 203.6275}, //Gandolero 93
-    {-2710.8804, 1332.8617, 8.0966, 0.2496}, //Gandolero 94
-    {-1640.2147, 1193.6373, 8.0963, 269.7488}, //Gandolero 95
-    {-2032.0089, 386.8932, 36.1949, 269.7305}, //Gandolero 96
-    {-2018.3187, 157.0018, 29.1167, 180.1446}, //Gandolero 97
-    {-2070.5310, 12.1418, 36.3300, 91.4882}, //Gandolero 98
-    {-2131.4089, -246.8278, 36.3354, 181.1541}, //Gandolero 99
-    {237.2796, -239.6378, 2.5223, 0.0157} //Gandolero 100
+    {558.4927, 1679.2808, 8.0128, 122.5777}, //Trailero 1
+    {827.8138, 881.7650, 14.3430, 21.1239}, //Trailero 2
+    {2850.3525, 908.9291, 11.7713, 270.7846}, //Trailero 3
+    {2890.7815, 2389.9792, 11.8417, 0.4900}, //Trailero 4
+    {2249.2656, 2749.4431, 11.8354, 359.4870}, //Trailero 5
+    {2126.3796, 2720.2888, 11.8393, 179.7311}, //Trailero 6
+    {1362.7999, 2663.8103, 11.8392, 271.8498}, //Trailero 7
+    {-274.3815, 2729.2820, 63.4319, 267.6748}, //Trailero 8
+    {1610.4584, 1313.9775, 11.8470, 178.7200}, //Trailero 9
+    {1645.5739, 1608.5126, 11.8432, 268.9828}, //Trailero 10
+    {2615.0969, 1667.1990, 11.8318, 269.9151}, //Trailero 11
+    {2549.2593, 1807.7865, 11.8388, 89.4350}, //Trailero 12
+    {2724.6189, 844.2164, 11.7690, 180.5505}, //Trailero 13
+    {1880.7380, 2244.4578, 11.8386, 88.2979}, //Trailero 14
+    {2042.7708, 2226.7466, 11.8402, 181.2429}, //Trailero 15
+    {2279.2534, -81.8274, 27.5412, 177.5374}, //Trailero 16
+    {2437.2944, 114.2882, 27.4920, 90.4098}, //Trailero 17
+    {1367.7606, 461.8178, 20.9980, 65.0816}, //Trailero 18
+    {1209.7925, 191.2797, 21.2085, 336.6670}, //Trailero 19
+    {1307.6132, 375.6104, 20.4282, 67.1695}, //Trailero 20
+    {152.9368, -68.8402, 2.4487, 90.7148}, //Trailero 21
+    {88.8455, -204.2908, 2.6110, 87.8179}, //Trailero 22
+    {44.3642, -241.6651, 2.6803, 175.8287}, //Trailero 23
+    {-69.2813, -35.4487, 4.1362, 341.2289}, //Trailero 24
+    {-96.8090, -386.2839, 2.4490, 263.2885}, //Trailero 25
+    {163.3313, -287.4623, 2.5958, 65.2118}, //Trailero 26
+    {313.1518, -239.6511, 2.5935, 178.3203}, //Trailero 27
+    {326.3068, -39.6793, 2.5690, 0.7595}, //Trailero 28
+    {-2093.0825, -2243.2732, 31.8301, 321.6132}, //Trailero 29
+    {-2135.9666, -2257.6240, 31.6513, 52.5531}, //Trailero 30
+    {-2195.7971, -2435.7605, 31.6449, 231.5589}, //Trailero 31
+    {-2118.3584, -2497.0642, 31.6441, 231.6839}, //Trailero 32
+    {-1922.8378, -2454.3760, 31.7175, 316.5790}, //Trailero 33
+    {-1551.8149, -2766.1025, 49.5532, 236.5401}, //Trailero 34
+    {-2105.9285, 208.1850, 36.2788, 89.7496}, //Trailero 35
+    {-2308.8091, -89.2265, 36.3376, 359.9427}, //Trailero 36
+    {-1730.9799, 121.4336, 4.5718, 1.3455}, //Trailero 37
+    {-1843.6483, 170.9646, 16.1343, 90.1068}, //Trailero 38
+    {-1669.5988, 404.9354, 8.1920, 315.3907}, //Trailero 39
+    {-1865.7761, 1412.2562, 8.1620, 49.0574}, //Trailero 40
+    {-2642.6821, 1340.4335, 8.1782, 179.8738}, //Trailero 41
+    {-2430.8176, 2313.5654, 6.0011, 359.9703}, //Trailero 42
+    {-2295.5571, 2410.5942, 5.9305, 44.0802}, //Trailero 43
+    {-857.4033, 1556.0908, 24.9709, 180.5035}, //Trailero 44
+    {-796.3324, 1617.3398, 28.1337, 85.1608}, //Trailero 45
+    {-1471.2135, 1854.7775, 33.6935, 95.7032}, //Trailero 46
+    {-1927.7935, 2384.6877, 50.5107, 21.6168}, //Trailero 47
+    {1444.5186, 992.1268, 11.8393, 269.6013}, //Trailero 48
+    {1444.7036, 1107.3566, 11.8412, 89.8653}, //Trailero 49
+    {1298.7842, 1104.6729, 11.8285, 179.7289}, //Trailero 50
+    {2751.0627, -2479.7747, 14.6688, 180.4993}, //Trailero 51
+    {2620.0862, -2448.0486, 14.6542, 90.2243}, //Trailero 52
+    {2692.0007, -2452.2864, 14.6566, 180.0571}, //Trailero 53
+    {2455.8506, -2544.3706, 14.6748, 179.4531}, //Trailero 54
+    {2299.7256, -2383.6880, 14.5659, 313.7910}, //Trailero 55
+    {1923.3036, -1791.2782, 14.4037, 89.6247}, //Trailero 56
+    {1776.2915, -2033.5527, 14.5290, 180.8559}, //Trailero 57
+    {1699.1205, -1519.9158, 14.4059, 180.9468}, //Trailero 58
+    {1601.4895, -1551.4532, 14.6035, 90.3844}, //Trailero 59
+    {1480.5985, -1497.3898, 14.5694, 90.5657}, //Trailero 60
+    {994.1107, -1365.0601, 14.3543, 359.2578}, //Trailero 61
+    {808.2496, -608.0873, 17.3560, 270.4110}, //Trailero 62
+    {658.9498, -559.1866, 17.3460, 359.3984}, //Trailero 63
+    {1129.8074, -1207.6315, 19.2264, 271.1347}, //Trailero 64
+    {1142.0723, -1342.5970, 14.6779, 179.9607}, //Trailero 65
+    {598.9575, -1508.8009, 16.1087, 90.6074}, //Trailero 66
+    {2475.1448, -1783.7399, 14.5796, 269.9936}, //Trailero 67
+    {2331.9531, -2096.9490, 14.5660, 89.4502}, //Trailero 68
+    {1931.2935, -2105.1753, 14.5935, 90.2296}, //Trailero 69
+    {1338.0511, -885.1326, 39.4267, 359.8221}, //Trailero 70
+    {403.8020, -1309.4276, 15.9160, 30.1343}, //Trailero 71
+    {2170.5122, -2653.0955, 14.5659, 89.9862}, //Trailero 72
+    {2513.8889, -2434.4111, 14.6308, 224.8943}, //Trailero 73
+    {2679.2856, -2531.1782, 14.3743, 178.7513}, //Trailero 74
+    {-1041.4867, -1182.8142, 129.9834, 1.3370}, //Trailero 75
+    {-571.7838, -533.0566, 26.5615, 178.3518}, //Trailero 76
+    {-99.3453, -1165.3184, 3.4665, 155.0169}, //Trailero 77
+    {2147.4160, -1177.9784, 24.8444, 180.8930}, //Trailero 78
+    {2036.7620, -1939.7360, 14.3525, 269.6179}, //Trailero 79
+    {2347.8213, -2001.9399, 14.4964, 177.4007}, //Trailero 80
+    {1594.1896, 2187.6416, 11.8384, 270.5564}, //Trailero 81
+    {1670.2050, 2211.2637, 11.8324, 359.4204}, //Trailero 82
+    {2204.9077, 2014.6293, 11.8338, 271.4988}, //Trailero 83
+    {2371.7708, 2547.9844, 11.8326, 0.0054}, //Trailero 84
+    {1514.9182, 2370.2405, 11.8421, 271.3715}, //Trailero 85
+    {1745.4080, 2220.5374, 11.8282, 341.2933}, //Trailero 86
+    {2557.1677, 1047.1879, 11.8341, 179.1602}, //Trailero 87
+    {2402.7727, 1032.2003, 11.8311, 91.8528}, //Trailero 88
+    {1979.4930, 2454.7139, 11.8327, 357.3623}, //Trailero 89
+    {-546.7468, -86.6275, 64.4183, 83.0518}, //Trailero 90
+    {636.0937, 1210.4792, 12.7355, 274.7817}, //Trailero 91
+    {275.4961, 1355.5228, 11.6055, 178.5724}, //Trailero 92
+    {-2856.3665, 1034.6874, 36.8642, 203.6275}, //Trailero 93
+    {-2710.8804, 1332.8617, 8.0966, 0.2496}, //Trailero 94
+    {-1640.2147, 1193.6373, 8.0963, 269.7488}, //Trailero 95
+    {-2032.0089, 386.8932, 36.1949, 269.7305}, //Trailero 96
+    {-2018.3187, 157.0018, 29.1167, 180.1446}, //Trailero 97
+    {-2070.5310, 12.1418, 36.3300, 91.4882}, //Trailero 98
+    {-2131.4089, -246.8278, 36.3354, 181.1541}, //Trailero 99
+    {237.2796, -239.6378, 2.5223, 0.0157} //Trailero 100
 };
 
 stock ClearTrailerInfo(vehicleid)
@@ -160,7 +160,7 @@ stock SetTrailerRentInfo(vehicleid)
     if(GetTrailerDriver(vehicleid)) return 1;
     if(IsRentedTrailer(vehicleid)) return 1;
 
-    gVehicle(vehicleid)[gb_vehicle_LABEL] = CreateDynamic3DTextLabel("{"#PRIMARY_COLOR"}RENTA\nEsta gandola esta disponible para la renta\nSubete para mas informacion.", -1, 0.0, 0.0, 0.5, 15.0, .attachedvehicle = vehicleid);
+    gVehicle(vehicleid)[gb_vehicle_LABEL] = CreateDynamic3DTextLabel("{"#PRIMARY_COLOR"}RENTA\nEste trailer esta disponible para la renta\nSubete para mas informacion.", -1, 0.0, 0.0, 0.5, 15.0, .attachedvehicle = vehicleid);
     return 1;
 }
 
@@ -191,7 +191,7 @@ stock LoadTrailer(vehicleid, playerid)
     KillTimer(PlayerTemp[playerid][pt_TIMERS][9]);
     PlayerTemp[playerid][pt_TIMERS][9] = SetTimerEx("TrailerLoadUp", 1000, false, "ii", playerid, vehicleid);
 
-    SendInfoMessage(playerid, "Aviso~n~~n~La gandola se está preparando, si sales de élla se cancelará el viaje.~n~~n~");
+    SendInfoMessage(playerid, "Aviso~n~~n~el trailer se está preparando, si sales de élla se cancelará el viaje.~n~~n~");
     return 1;
 }
 
@@ -396,7 +396,7 @@ hook OnPlayerEnterDynamicCP(playerid, checkpointid)
                     if(IsVehicleTrailer_Truck(vehicleid))
                     {
                         new rent_payment = minrand(500, 700);
-                        SendInfoMessagef(playerid, "Aviso~n~~n~Se te ha descontado ~r~%s$~w~ por la renta de la gandola.~n~~n~", number_format_thousand(rent_payment));
+                        SendInfoMessagef(playerid, "Aviso~n~~n~Se te ha descontado ~r~%s$~w~ por la renta de este trailer.~n~~n~", number_format_thousand(rent_payment));
                         payment -= rent_payment;
                     }
                 }
@@ -404,7 +404,7 @@ hook OnPlayerEnterDynamicCP(playerid, checkpointid)
 
 			if(GivePlayerCash(playerid, payment, true, false)) 
 			{
-                SendInfoMessagef(playerid, "Gandolero~n~~n~~g~+~y~1~w~ de Experiencia~n~~n~");
+                SendInfoMessagef(playerid, "Trailero~n~~n~~g~+~y~1~w~ de Experiencia~n~~n~");
 				PLAYER_WORKS[playerid][WORK_TRAILER][pwork_LEVEL] ++;
 
 				new string[64];
@@ -443,7 +443,7 @@ public TrailerLoadUp(playerid, vehicleid)
 	TrailerVehicle(vehicleid)[trailer_LOADING] = false;
 	TrailerVehicle(vehicleid)[trailer_DELIVERED] = false;
 	
-	SendInfoMessage(playerid, "Gandolero~n~~n~La mercancia ha sido cargada, ve al ~r~punto de entrega~w~ para entregar la mercancia.~n~~n~");
+	SendInfoMessage(playerid, "Trailero~n~~n~La mercancia ha sido cargada, ve al ~r~punto de entrega~w~ para entregar la mercancia.~n~~n~");
 	SetPlayerTrailerCheckpoint(playerid, vehicleid);
 	return 1;
 }
@@ -473,7 +473,7 @@ public TrailerUnLoadUp(playerid, vehicleid)
 	TrailerVehicle(vehicleid)[trailer_UNLOADING] = false;
 	TrailerVehicle(vehicleid)[trailer_DELIVERED] = true;
 	
-	SendInfoMessagef(playerid, "Gandolero~n~~n~La mercancia ha sido entregada, ve a ~r~la compañia~w~ para finalizar y recibir tu paga.~n~~n~");
+	SendInfoMessagef(playerid, "Trailero~n~~n~La mercancia ha sido entregada, ve a ~r~la compañia~w~ para finalizar y recibir tu paga.~n~~n~");
 	SetPlayerTrailerCheckpoint(playerid, vehicleid);
 	return 1;
 }
@@ -485,13 +485,13 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
     {
         if(IsPlayerInRangeOfPoint(playerid, 5.0, Trailer_StartJob_Pos[0], Trailer_StartJob_Pos[1], Trailer_StartJob_Pos[2]))
         {
-            if(!GetPlayerWork(playerid, WORK_TRAILER)) return SendMessage(playerid, "No eres gandolero.");
+            if(!GetPlayerWork(playerid, WORK_TRAILER)) return SendMessage(playerid, "No eres Trailero.");
             if(GetPlayerState(playerid) != PLAYER_STATE_DRIVER) return 1;
 
             new modelid = Random_Trailer_ModelID[random(sizeof(Random_Trailer_ModelID))];
 
             new vehicleid = GetPlayerVehicleID(playerid);
-            if(!IsVehicleTrailer_Truck(vehicleid)) return SendMessage(playerid, "Necesitas una gandola.");
+            if(!IsVehicleTrailer_Truck(vehicleid)) return SendMessage(playerid, "Necesitas un trailer.");
             if(TrailerVehicle(vehicleid)[trailer_TRAILER] != -1) return SendMessage(playerid, "Ya tienes un trailer.");
 
             new trailer_id = CreateVehicle(
@@ -560,7 +560,7 @@ callbackp:AttachTrailerToTruck(playerid, vehicleid, trailerid)
 
 hook OnScriptInit()
 {
-    CreateDynamic3DTextLabel("Gandolero\nPulsa {"#PRIMARY_COLOR"}'H'{ffffff} para recibir un trabajo", -1, Trailer_StartJob_Pos[0], Trailer_StartJob_Pos[1], Trailer_StartJob_Pos[2], 15.0, .testlos = true);
+    CreateDynamic3DTextLabel("Trailero\nPulsa {"#PRIMARY_COLOR"}'H'{ffffff} para recibir un trabajo", -1, Trailer_StartJob_Pos[0], Trailer_StartJob_Pos[1], Trailer_StartJob_Pos[2], 15.0, .testlos = true);
 }
 
 hook OnPlayerStateChange(playerid, newstate, oldstate) 
@@ -574,7 +574,7 @@ hook OnPlayerStateChange(playerid, newstate, oldstate)
 			{
 				if(IsVehicleTrailer_Truck(vehicleid))
 				{
-					SendInfoMessage(playerid, "Gandolero~n~~n~Para rentar esta gandola usa ~b~/rentar~w~ pero recuerda que cada vez que hagas un viaje se ta descontara un poco de tu dinero.~n~~n~");
+					SendInfoMessage(playerid, "Trailero~n~~n~Para rentar este trailer usa ~b~/rentar~w~ pero recuerda que cada vez que hagas un viaje se ta descontara un poco de tu dinero.~n~~n~");
 				}
 			}
 		}
@@ -596,17 +596,17 @@ hook OnPlayerStateChange(playerid, newstate, oldstate)
 
 CMD:rentar(playerid, params[])
 {
-    if(GetPlayerState(playerid) != PLAYER_STATE_DRIVER) return SendMessage(playerid, "Debes estar dentro de una gandola, como conductor.");
+    if(GetPlayerState(playerid) != PLAYER_STATE_DRIVER) return SendMessage(playerid, "Debes estar dentro de un trailer, como conductor.");
     new vehicleid = GetPlayerVehicleID(playerid);
 
-    if(!GetPlayerWork(playerid, WORK_TRAILER)) return SendMessage(playerid, "Necesitas ser gandolero para rentar una gandola.");
-    if(!IsVehicleTrailer_Truck(vehicleid)) return SendMessage(playerid, "No estas en una gandola.");
-    if(GetVehicleWork(vehicleid) != WORK_TRAILER) return SendMessage(playerid, "Esta gandola no se puede rentar.");
-    if(IsRentedTrailer(vehicleid)) return SendMessage(playerid, "Esta gandola ya esta rentada.");
+    if(!GetPlayerWork(playerid, WORK_TRAILER)) return SendMessage(playerid, "Necesitas ser Trailero para rentar un trailer.");
+    if(!IsVehicleTrailer_Truck(vehicleid)) return SendMessage(playerid, "No estas en un trailer.");
+    if(GetVehicleWork(vehicleid) != WORK_TRAILER) return SendMessage(playerid, "Este trailer no se puede rentar.");
+    if(IsRentedTrailer(vehicleid)) return SendMessage(playerid, "Este trailer ya esta rentada.");
 
     if(pTemp(playerid)[pt_RENT_VEHICLE] != INVALID_VEHICLE_ID)
     {
-        if(IsRentedTrailer(pTemp(playerid)[pt_RENT_VEHICLE])) return SendMessage(playerid, "Ya tienes una gandola rentada.");
+        if(IsRentedTrailer(pTemp(playerid)[pt_RENT_VEHICLE])) return SendMessage(playerid, "Ya tienes un trailer rentada.");
     }
 
     new modelid = GetVehicleModel(vehicleid);
@@ -675,14 +675,14 @@ CMD:rentar(playerid, params[])
 
     PutPlayerInVehicle(playerid, vehicle_id, 0);
 
-    SendInfoMessagef(playerid, "Gandolero~n~~n~Has rentado una gandola, usa ~b~/desrentar~w~ si quieres dejar de usarla.~n~~n~");
+    SendInfoMessagef(playerid, "Trailero~n~~n~Has rentado un trailer, usa ~b~/desrentar~w~ si quieres dejar de usarla.~n~~n~");
     return 1;
 }
 
 CMD:desrentar(playerid, params[])
 {
-    if(pTemp(playerid)[pt_RENT_VEHICLE] == INVALID_VEHICLE_ID) return SendMessage(playerid, "No tienes ninguna gandola rentada.");
-    if(TrailerVehicle( pTemp(playerid)[pt_RENT_VEHICLE] )[trailer_DRIVER] != PI[playerid][pi_ID]) return SendMessage(playerid, "No tienes ninguna gandola rentada.");
+    if(pTemp(playerid)[pt_RENT_VEHICLE] == INVALID_VEHICLE_ID) return SendMessage(playerid, "No tienes ningun trailer rentado.");
+    if(TrailerVehicle( pTemp(playerid)[pt_RENT_VEHICLE] )[trailer_DRIVER] != PI[playerid][pi_ID]) return SendMessage(playerid, "No tienes ningun trailer rentado.");
 
     TrailerVehicle(pTemp(playerid)[pt_RENT_VEHICLE])[trailer_RENT] = false;
 
@@ -703,6 +703,6 @@ CMD:desrentar(playerid, params[])
 
     pTemp(playerid)[pt_RENT_VEHICLE] = INVALID_VEHICLE_ID;
 
-    SendInfoMessagef(playerid, "Gandolero~n~~n~Has desrentado tu gandola.~n~~n~");
+    SendInfoMessagef(playerid, "Trailero~n~~n~Has desrentado el trailer.~n~~n~");
     return 1;
 }

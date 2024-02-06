@@ -101,6 +101,7 @@ AddMechanicGaragePieces(amount, bool:negative)
 	if(negative && (MECHANIC_GARAGE_PIECES + amount) < 0) return 0;
 
 	MECHANIC_GARAGE_PIECES += amount;
+	UpdateMechanicPieces();
 	return 1;
 }
 
