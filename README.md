@@ -8,7 +8,7 @@
  - [x] trabajo traficante
  - [x] La gamemode no esta hecha un desastre, cada cosa nueva se implemento en modulos
 
-
+______________________________________________________________________________________________________________
 
 > [!NOTE]
 > Recuerden que deben usar sus propios ejecutables de samp.mp para abrir el servidor.
