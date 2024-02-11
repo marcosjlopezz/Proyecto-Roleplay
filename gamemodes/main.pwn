@@ -18968,11 +18968,12 @@ RegisterNewPlayer(playerid)
 				config_hud,\
 				config_admin,\
 				phone_visible_number,\
-				doubt_channel\
+				doubt_channel,\
+				vip_expire_date\
 			) \
 			VALUES\
 			(\
-				'%e', '%e', '%e', '%e', '%e', '%e', '%e', %d, %d, %d, %d, %d, %d, %d, %d, %f, %f, %f, %f, %d, %d, %f, %f, %f, %d, %d, %d, %d, %d, %d, %d\
+				'%e', '%e', '%e', '%e', '%e', '%e', '%e', %d, %d, %d, %d, %d, %d, %d, %d, %f, %f, %f, %f, %d, %d, %f, %f, %f, %d, %d, %d, %d, %d, %d, %d, '0000-00-00 00:00:00'\
 			);\
 		",
 			PI[playerid][pi_NAME], PI[playerid][pi_IP], PI[playerid][pi_EMAIL], PI[playerid][pi_SALT],
